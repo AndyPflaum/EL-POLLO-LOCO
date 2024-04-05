@@ -1,0 +1,40 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Permanent Marker', cursive;
+    background-image: url('img/wüste.jpg');
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+    width: 100vw;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+canvas {
+    background-color: black;
+    display: block;
+}
+
+h1 {
+    font-size: 50px;
+}
+
+.directions {
+    font-size: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+@media only screen and(max-width: 720px) {
+    canvas {
+        width: 100%;
+    }
+}
+
+@media only screen and(max-height: 480px) {
+    canvas {
+        height: 100vh;
+    }
+}
