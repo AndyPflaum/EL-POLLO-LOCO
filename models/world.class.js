@@ -64,10 +64,6 @@ class World {
 
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
-            if (this.bottle.isColliding(this.level.enemies)) {
-                this.bossLife -= 20;
-            }
-
             if (this.character.isColliding(enemy)) {
                 this.character.hit();
                 this.coinValue -= 5;
@@ -76,6 +72,14 @@ class World {
             }
             if (this.coinValue < 0) {
                 this.coinValue = 0;
+            }
+        });
+        this.throwableObject.forEach((bottle, bottleIndex) => {
+            if (this.level.enemies.some(boss => boss.isColliding(bottle))) {
+                // Die Flasche trifft den Boss
+                this.bossLife -= 20; // Der Boss verliert 20 Lebenspunkte
+                this.throwableObject.splice(bottleIndex, 1); // Die Flasche wird aus dem Spiel entfernt
+                this.bossBar.setPercentage(this.bossLife); // Die Anzeige des Boss-Lebens wird aktualisiert
             }
         });
         if (this.coinValue < 100) {
