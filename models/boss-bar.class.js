@@ -1,4 +1,4 @@
-class BossBar extends DrawableObject {
+class BossBar extends MovableObject {
     IMAGES = [
         'img/7_statusbars/2_statusbar_endboss/blue/blue0.png',
         'img/7_statusbars/2_statusbar_endboss/blue/blue20.png',
@@ -7,6 +7,12 @@ class BossBar extends DrawableObject {
         'img/7_statusbars/2_statusbar_endboss/blue/blue80.png',
         'img/7_statusbars/2_statusbar_endboss/blue/blue100.png',
     ];
+
+    IMAGES_DEAD = [
+        'img/4_enemie_boss_chicken/5_dead/G24.png',
+        'img/4_enemie_boss_chicken/5_dead/G25.png',
+        'img/4_enemie_boss_chicken/5_dead/G26.png',
+    ]
 
     percentage = 100;
 
@@ -18,6 +24,7 @@ class BossBar extends DrawableObject {
         this.width = 60;
         this.height = 200;
         this.setPercentage(100);
+
     }
 
     setPercentage(percentage) {
@@ -39,9 +46,8 @@ class BossBar extends DrawableObject {
             return 2;
         } else if (this.percentage > 20) {
             return 1;
-        } else  {
+        } else {
             return 0;
         }
     }
-    
 }

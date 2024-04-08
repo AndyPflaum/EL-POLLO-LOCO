@@ -35,5 +35,15 @@ IMAGES_BOTTEL = [
         }, 50);
     }
 
+    isColliding(enemy) {
+        // Überprüfe, ob die Position des gegnerischen Objekts im Bereich des Wurfs ist
+        return (
+            this.x < enemy.x + enemy.width &&
+            this.x + this.width > enemy.x &&
+            this.y < enemy.y + enemy.height &&
+            this.y + this.height > enemy.y
+        );
+    }
+
     
 }
