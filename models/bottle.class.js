@@ -16,14 +16,13 @@ class Bottle extends MovableObject {
         super().loadImage(imagePatch);
         this.x = Math.random() * (719 * 2 + 1400) - 1350;
         this.y = 356;
+        this.animate();
 
     }
 
 animate(){
     if (this.isAboveGround()) {
-    
-    } else{
-        this.playAnimation(this.IMAGES_BOTTLE_SPLASH);
+        this.playAnimation(this.IMAGES_BOTTLE_SPLASH)
     }
 }
 

@@ -8,12 +8,6 @@ class BossBar extends MovableObject {
         'img/7_statusbars/2_statusbar_endboss/blue/blue100.png',
     ];
 
-    IMAGES_DEAD = [
-        'img/4_enemie_boss_chicken/5_dead/G24.png',
-        'img/4_enemie_boss_chicken/5_dead/G25.png',
-        'img/4_enemie_boss_chicken/5_dead/G26.png',
-    ]
-
     percentage = 100;
 
     constructor() {
@@ -24,7 +18,6 @@ class BossBar extends MovableObject {
         this.width = 60;
         this.height = 200;
         this.setPercentage(100);
-
     }
 
     setPercentage(percentage) {
@@ -32,9 +25,8 @@ class BossBar extends MovableObject {
         let path = this.IMAGES[this.resolveImageIndex()];
         this.img = this.imageCache[path];
         this.otherDiretion = true;
-
-
     }
+    
     resolveImageIndex() {
         if (this.percentage == 100) {
             return 5;

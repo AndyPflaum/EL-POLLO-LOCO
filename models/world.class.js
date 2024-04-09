@@ -57,17 +57,21 @@ class World {
             this.throwableObject.push(bottle);
             this.bottleValue -= 20; // Reduziere die Anzahl der verfügbaren Flaschen um 1
             this.bottleBar.setPercentage(this.bottleValue); // Aktualisiere die Flaschenanzeige
-            
+
             // Überprüfe, ob eine geworfene Flasche den Boss trifft
             if (this.checkForCollidingBottleOfBoss(bottle)) {
-                // Die Flasche trifft den Boss
-                this.bossLife -= 20; // Der Boss verliert 20 Lebenspunkte
-                this.bossBar.setPercentage(this.bossLife); // Die Anzeige des Boss-Lebens wird aktualisiert
+                this.bossLifeToUpdate(bossBar);
             }
         }
     }
-    checkForCollidingBottleOfBoss(bottle){
-        return this.level.enemies.some(boss => boss instanceof Endboss && bottle.isColliding(boss))
+    checkForCollidingBottleOfBoss(bottle) {
+        return this.level.enemies.some(boss => boss instanceof Endboss && bottle.isColliding(boss));
+    }
+
+    bossLifeToUpdate() {
+        this.bossLife -= 20;
+        this.bossBar.setPercentage(this.bossLife);
+        return this.bossLife; // Rückgabe des aktualisierten Boss-Lebens
     }
 
     checkCollisions() {
@@ -92,10 +96,10 @@ class World {
             this.level.coin.forEach((coin) => {
                 if (this.character.isColliding(coin)) {
                     this.playCoinSound();
-                    this.level.removeCoin(coin); 
-                    this.coinValue += 20; 
+                    this.level.removeCoin(coin);
+                    this.coinValue += 20;
                     if (this.coinValue > 100) {
-                        this.coinValue = 100; 
+                        this.coinValue = 100;
                     }
                     this.coinBar.setPercentage(this.coinValue); // Aktualisiere die Münzanzeige
                 }
@@ -109,7 +113,7 @@ class World {
                     if (this.bottleValue > 100) {
                         this.bottleValue = 100;
                     }
-    
+
                     this.bottleBar.setPercentage(this.bottleValue); // Aktualisiere die Flaschenanzeige
                     this.level.bottle.splice(index, 1); // Entferne die Flasche aus dem Array
                     this.bossBar.setPercentage(this.bossLife);
@@ -117,10 +121,10 @@ class World {
             });
         };
     }
-    checkCharachrterForCollidingChicken(enemy){
-       return this.character.isColliding(enemy);
+    checkCharachrterForCollidingChicken(enemy) {
+        return this.character.isColliding(enemy);
     }
-    checkCharachrterForCollidingBottle(bottle){
+    checkCharachrterForCollidingBottle(bottle) {
         return this.character.isColliding(bottle);
     }
 

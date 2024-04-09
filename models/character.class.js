@@ -84,8 +84,8 @@ class Character extends MovableObject {
     animate() {
         setInterval(() => {
             this.walking_sound.pause();
-            this.mexico_sound.play();
-            this.mexico_sound.volume = 0.2;
+            // this.mexico_sound.play();
+            // this.mexico_sound.volume = 0.2;
            
             if (this.world.keybord.RIGHT && this.x < world.level.level_end_x) {
                 this.moveRight();
@@ -125,7 +125,7 @@ class Character extends MovableObject {
                    
                 }
             }
-        }, 90);
+        }, 150);
     }
 
 
