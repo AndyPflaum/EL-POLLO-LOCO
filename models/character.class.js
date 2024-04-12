@@ -48,7 +48,7 @@ class Character extends MovableObject {
         'img/2_character_pepe/1_idle/idle/I-8.png',
         'img/2_character_pepe/1_idle/idle/I-9.png',
         'img/2_character_pepe/1_idle/idle/I-10.png',
-        
+
     ]
     IMAGES_LONGSTAND = [
         'img/2_character_pepe/1_idle/long_idle/I-11.png',
@@ -68,7 +68,7 @@ class Character extends MovableObject {
     mexico_sound = new Audio('audio/mexico_sound.mp3');
     pains_sound = new Audio('audio/game-over-sound.mp3');
     hasPlayedDeathSound = false;
-    
+
     constructor() {
         super().loadImage('img/2_character_pepe/2_walk/W-21.png');
         this.loadImages(this.IMAGES_WALKING);
@@ -86,7 +86,7 @@ class Character extends MovableObject {
             this.walking_sound.pause();
             // this.mexico_sound.play();
             // this.mexico_sound.volume = 0.2;
-           
+
             if (this.world.keybord.RIGHT && this.x < world.level.level_end_x) {
                 this.moveRight();
                 this.walking_sound.play();
@@ -101,7 +101,7 @@ class Character extends MovableObject {
             if (this.world.keybord.SPACE && !this.isAboveGround()) {
                 this.jump_sound.play();
                 this.jump();
-                
+
             }
 
             this.world.camera_x = -this.x + 100;
@@ -109,7 +109,7 @@ class Character extends MovableObject {
 
         setInterval(() => {
 
-            if (this.isDead()) {
+            if (this.isDead() && !this.hasPlayedDeathSound) {
                 this.playAnimation(this.IMAGES_DEAD);
                 // this.pains_sound.play();
             } else if (this.isHurt()) {
@@ -122,16 +122,12 @@ class Character extends MovableObject {
                     this.playAnimation(this.IMAGES_WALKING);
                 } else {
                     this.playAnimation(this.IMAGES_STAND);
-                   
                 }
             }
         }, 150);
     }
 
-
     jump() {
         this.speedY = 30;
     }
-
-    
 }

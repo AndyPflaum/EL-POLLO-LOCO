@@ -5,9 +5,8 @@ class MovableObject extends DrawableObject {
     acceleration = 2.5;
     energy = 100;
     lastHit = 0;
-    bossLife = 100;
     applygravityInterval;
-
+   
     applygravity() {
         this.applygravityInterval = setInterval(() => {
             if (this.isAboveGround() || this.speedY > 0) {
@@ -24,8 +23,6 @@ class MovableObject extends DrawableObject {
             return this.y < 100;
         }
     }
-
-
 
     isColliding(mo) {
         return this.x + this.height > mo.x &&

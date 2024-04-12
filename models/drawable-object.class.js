@@ -6,15 +6,11 @@ class DrawableObject{
     y = 250;
     width = 100;
     height = 100;
-    hitboxWidth = 60; // Neue Breite für die Hitbox
-    hitboxHeight = 60; // Neue Höhe für die Hitbox
-
 
     loadImage(path) {
         this.img = new Image();
         this.img.src = path;
     }
-
     
     draw(ctx) {
         ctx.drawImage(this.img, this.x, this.y, this.height, this.width);

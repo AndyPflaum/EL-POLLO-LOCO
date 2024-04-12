@@ -16,8 +16,6 @@ class ThrowableObject extends MovableObject {
         'img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png',
     ]
 
-
-
     constructor(x, y) {
         super().loadImage('img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png');
         this.loadImages(this.IMAGES_BOTTEL);
@@ -26,46 +24,45 @@ class ThrowableObject extends MovableObject {
         this.y = y;
         this.height = 50;
         this.width = 60;
-        this.trow();
+        this.throw();
         this.animate();
 
     }
-    
-    trowInterval;
 
-    trow() {
-        this.speedY = 30;
+    throwInterval;
+
+    throw() {
+        this.speedY = 20;
         this.applygravity();
         this.trowInterval = setInterval(() => {
-                this.x += 10
-                if (this.isBroken) {
-                    clearInterval(this.applygravityInterval);
-                    clearInterval(this.trowInterval);
-                }
-            
-            
+            this.bottleFallsOnTheFloor();
+            if (this.isBroken) {
+                this.stopBottle();
+            } else {
+                this.x += 10;
+            }
         }, 25);
+    }
+    
+    stopBottle() {
+        clearInterval(this.applygravityInterval);
+        clearInterval(this.trowInterval);
+    }
+
+    bottleFallsOnTheFloor() {
+        if (this.y >= 350) {
+            this.isBroken = true;
+        }
+
     }
 
     animate() {
         setInterval(() => {
-            if (this.isBroken) {
+            if (this.isBroken && this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_BOTTEL_SPLASH)
-            } else{
+            } else {
                 this.playAnimation(this.IMAGES_BOTTEL);
             }
         }, 50);
     }
-
-    isColliding(enemy) {
-        // Überprüfe, ob die Position des gegnerischen Objekts im Bereich des Wurfs ist
-        return (
-            this.x < enemy.x + enemy.width &&
-            this.x + this.width > enemy.x &&
-            this.y < enemy.y + enemy.height &&
-            this.y + this.height > enemy.y
-        );
-    }
-
-
 }

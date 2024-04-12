@@ -7,17 +7,18 @@ class Level {
 
     /**
      * 
-     * @param {Chicken | Endboss} enemies 
+     * @param {Chicken} enemies 
      * @param {Clouds} clouds 
      * @param {BackgroundObjects} backgroundObjects 
      * @param {Coins} coin
      */
-    constructor(enemies, clouds, backgroundObjects, coin, bottle) {
+    constructor(enemies, clouds, backgroundObjects, coin, bottle, endboss) {
         this.enemies = enemies;
         this.clouds = clouds;
         this.backgroundObjects = backgroundObjects;
         this.coin = coin;
         this.bottle = bottle;
+        this.endboss = endboss;
 
     }
     /**

@@ -17,9 +17,6 @@ class World {
     bossBar = new BossBar();
     bossLife = 100;
 
-
-
-
     constructor(canvas, keybord) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
@@ -27,7 +24,6 @@ class World {
         this.draw();
         this.setWorld();
         this.run();
-
     }
 
     setWorld() {
@@ -38,44 +34,56 @@ class World {
         setInterval(() => {
             this.checkCollisions();
             this.checkThrowObject();
-        }, 200);
-    }
 
-    attackCharacter() {
-        if (this.character.x > 1200) {
-            this.bottleValue = 100;
-        }
+        }, 200);
     }
 
     playCoinSound() {
         this.coin_sound.play();
     }
 
+    removeThrowableObject(index) {
+        setTimeout(() => {
+            this.throwableObject.splice(index, 1);
+            this.isThrowingBottle = false;
+        }, 1250);
+    }
+
+    // jumpOfChicken() {
+    //     if (this.character.y + 260 === this.enemies.y) {
+    //         // Wenn ja, entferne das Huhn aus der Liste der Gegner
+    //         this.level.enemies.splice(index, 1);
+    //     }
+    //     console.log('die Y achse beim character ist auf', this.character.y + 260);
+    // }
     checkThrowObject() {
-        if (this.keybord.D && this.bottleValue > 0) {
+        if (this.keybord.D && this.bottleValue > 0 && !this.isThrowingBottle) {
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
             this.throwableObject.push(bottle);
             this.bottleValue -= 20; // Reduziere die Anzahl der verfügbaren Flaschen um 1
             this.bottleBar.setPercentage(this.bottleValue); // Aktualisiere die Flaschenanzeige
 
-            // Überprüfe, ob eine geworfene Flasche den Boss trifft
+            this.isThrowingBottle = true;
             if (this.checkForCollidingBottleOfBoss(bottle)) {
-                this.bossLifeToUpdate(bossBar);
+                this.bossLifeToUpdate(this.bossBar);
             }
+            this.removeThrowableObject();
         }
     }
+
     checkForCollidingBottleOfBoss(bottle) {
-        return this.level.enemies.some(boss => boss instanceof Endboss && bottle.isColliding(boss));
+        return this.level.enemies.some(endboss => endboss instanceof Endboss && bottle.isColliding(endboss));
     }
 
     bossLifeToUpdate() {
         this.bossLife -= 20;
         this.bossBar.setPercentage(this.bossLife);
+
         return this.bossLife; // Rückgabe des aktualisierten Boss-Lebens
     }
 
     checkCollisions() {
-        this.level.enemies.forEach((enemy) => {
+        this.level.enemies.forEach((enemy, index) => {
             if (this.checkCharachrterForCollidingChicken(enemy)) {
                 this.character.hit();
                 this.stadusBar.setPercentage(this.character.energy);
@@ -83,17 +91,45 @@ class World {
             if (this.coinValue < 0) {
                 this.coinValue = 0;
             }
+            if (this.bottle.isColliding(enemy)) {
+                this.level.enemies.splice(index, 1);
+            }
+            
+
         });
+
         this.throwableObject.forEach((bottle, bottleIndex) => {
-            if (this.level.enemies.some(boss => !bottle.isBroken && boss instanceof Endboss && boss.isColliding(bottle))) {
+            if (this.level.endboss.some(boss => !bottle.isBroken && boss instanceof Endboss && boss.isColliding(bottle))) {
                 // Die Flasche trifft den Boss
                 this.bossLife -= 20; // Der Boss verliert 20 Lebenspunkte
+                if (this.bossLife <= 0) {
+                    this.bossLife = 0;
+                    console.log('Endboss is DEAD');
+                }
+            
+                console.log('Boss Leben ist auf ', this.bossLife, '%');
                 bottle.isBroken = true;
                 this.bossBar.setPercentage(this.bossLife); // Die Anzeige des Boss-Lebens wird aktualisiert
                 setTimeout(() => {
                     this.removeBottle(bottleIndex); // Flasche entfernen
-                }, 300); 
+                }, 300);
             }
+        });
+        this.throwableObject.forEach((bottle, bottleIndex) => {
+            this.level.enemies.forEach((enemy, enemyIndex) => {
+                if (enemy instanceof Chicken && enemy.isColliding(bottle)) {
+                    // Das Chicken wird von der Flasche getroffen
+                    enemy.playAnimation(enemy.IMAGES_DEAD);
+                    enemy.energy = 0;
+                     setTimeout(() => {
+                        this.level.enemies.splice(enemyIndex, 1);
+                     }, 500);
+                    bottle.isBroken = true; // Die Flasche wird als gebrochen markiert
+                    setTimeout(() => {
+                        this.removeBottle(bottleIndex); // Entferne die Flasche nach einer Verzögerung
+                    }, 300);
+                }
+            });
         });
         if (this.coinValue < 100) {
             this.level.coin.forEach((coin) => {
@@ -148,11 +184,12 @@ class World {
         this.ctx.translate(this.camera_x, 0);
 
         this.addToMap(this.character);
-        
+
         this.addObjectsToMap(this.level.bottle);
         this.addObjectsToMap(this.level.coin);
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.enemies);
+        this.addObjectsToMap(this.level.endboss);
         this.addObjectsToMap(this.throwableObject);
 
         this.ctx.translate(-this.camera_x, 0);
@@ -168,7 +205,6 @@ class World {
         objects.forEach(o => {
             this.addToMap(o);
         });
-
     }
 
     addToMap(mo) {
@@ -180,7 +216,6 @@ class World {
         if (mo.otherDiretion) {
             this.flipImageBack(mo);
         }
-
     }
 
     flipImage(mo) {
@@ -194,6 +229,4 @@ class World {
         mo.x = mo.x * -1;
         this.ctx.restore();
     }
-
-
 }
