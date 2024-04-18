@@ -24,7 +24,6 @@
     <script src="models/level.class.js"></script>
     <script src="models/throwable-object.class.js"></script>
     <script src="models/endboss.class.js"></script>
-
     <script src="levels/level1.js"></script>
     <script src="js/game.js"></script>
     <link rel="stylesheet" href="style.css">
@@ -37,7 +36,20 @@
         <span>PRESS D = THROW BOTTLE</span>
         <span>PRESS SPACE = JUMP</span>
         <span>PRESS -> = RUN RIGHT</span>
-        <span> PRESS <- = RUN LEFT</span>
+        <span> PRESS <-=RUN LEFT</span>
+    </div>
+    <div id="startPolloLoco" class="startPolloLoco">
+        <button class="startButton" onclick="start()">START</button>
+        <img class="start" src="img/9_intro_outro_screens/start/startscreen_2.png" alt="">
+    </div>
+    <div id="gameOver" class="gameOver">
+        <button class="startButton" onclick="reStart()">RESTART</button>
+        <img class="over" src="img/9_intro_outro_screens/game_over/game over.png" alt="">
+    </div>
+    <div id="nextLevel" class="nextGamePolloLoco">
+        <button class="next">NEXT LEVEL <p> Not yet available</p></button>
+        <img class="start" src="img/9_intro_outro_screens/start/startscreen_1.png" alt="">
+        <button class="neustart" onclick="startAnew()">START ANEW</button>
     </div>
 
 </body>

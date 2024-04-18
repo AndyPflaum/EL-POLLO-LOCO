@@ -28,6 +28,101 @@ h1 {
     flex-direction: column;
 }
 
+.start {
+    width: 720px;
+    height: 480px;
+    position: absolute;
+    top: 140px;
+
+}
+
+.startPolloLoco {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.startButton {
+    font-size: 50px;
+    font-family: 'Permanent Marker', cursive;
+    background-color: yellow;
+    border-radius: 10px;
+    transition: font-size 0.5s ease-in-out, background-color 0.5s ease-in-out;
+    cursor: pointer;
+    position: absolute;
+    top: 170px;
+    z-index: 1;
+}
+
+.over {
+    width: 720px;
+    height: 480px;
+    position: absolute;
+    top: 140px;
+    background-color: rgb(255, 242, 53);
+}
+
+.gameOver {
+    font-size: 50px;
+    font-family: 'Permanent Marker', cursive;
+    background-color: yellow;
+    border-radius: 10px;
+    transition: font-size 0.5s ease-in-out, background-color 0.5s ease-in-out;
+    cursor: pointer;
+    position: absolute;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    display: none;
+}
+
+.startButton:hover {
+    font-size: 70px;
+    background-color: rgb(208, 255, 0);
+}
+
+.nextGamePolloLoco {
+    font-size: 50px;
+    font-family: 'Permanent Marker', cursive;
+    cursor: pointer;
+    position: absolute;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    display: none;
+}
+
+.next{
+    font-size: 30px;
+    font-family: 'Permanent Marker', cursive;
+    border-radius: 10px;
+    cursor: pointer;
+    position: absolute;
+    top: 170px;
+    z-index: 1;
+    background-color: grey;
+}
+
+.next p {
+    font-size: 15px;
+}
+.neustart{
+    position: absolute;
+    top: 500px;
+    font-size: 30px;
+    border-radius: 10px;
+    font-family: 'Permanent Marker', cursive;
+    background-color: yellow;
+    transition: font-size 0.5s ease-in-out, background-color 0.5s ease-in-out;
+}
+.neustart:hover{
+    font-size: 40px;
+    background-color: rgb(208, 255, 0);
+}
+
+
 @media only screen and(max-width: 720px) {
     canvas {
         width: 100%;

@@ -3,6 +3,8 @@ class Level {
     clouds;
     backgroundObjects;
     coin;
+    bottle;
+    endboss;
     level_end_x = 1530;
 
     /**
@@ -31,6 +33,4 @@ class Level {
             this.coin.splice(index, 1);
         }
     }
-
-   
 }

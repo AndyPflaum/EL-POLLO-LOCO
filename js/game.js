@@ -1,18 +1,33 @@
 let canvas;
 let world;
 let keybord = new Kayboard();
-// let mexico_sound = new Audio('audio/mexico_sound.mp3');
-
 
 function init() {
     canvas = document.getElementById('canvas');
-    world = new World(canvas, keybord);
-    // mexico_sound.play();
-    // mexico_sound.volume = 0.2;
-    
+
 }
 
-window.addEventListener("keydown", (e) =>{
+function start() {
+    let startPolloLoco = document.getElementById('startPolloLoco');
+    startPolloLoco.style.display = 'none';
+    initLevel();
+    world = new World(canvas, keybord);
+}
+
+function reStart() {
+    let restartPolloLoco = document.getElementById('gameOver');
+    restartPolloLoco.style.display = 'none';
+    location.reload();
+}
+function startAnew(){
+    if (world.bossLife <= 0) {
+       
+    }
+    location.reload();
+
+}
+
+window.addEventListener("keydown", (e) => {
     if (e.keyCode == 39) {
         keybord.RIGHT = true;
     }
@@ -31,10 +46,10 @@ window.addEventListener("keydown", (e) =>{
     if (e.keyCode == 68) {
         keybord.D = true;
     }
-    
+
 
 });
-window.addEventListener("keyup", (e) =>{
+window.addEventListener("keyup", (e) => {
     if (e.keyCode == 39) {
         keybord.RIGHT = false;
     }
@@ -53,6 +68,6 @@ window.addEventListener("keyup", (e) =>{
     if (e.keyCode == 68) {
         keybord.D = false;
     }
-    
+
 
 })
