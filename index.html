@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+<html translate="no">
+
+</html>
+
 
 <head>
     <meta charset="UTF-8">
@@ -31,26 +35,52 @@
 
 <body onload="init()">
     <h1>EL POLLO LOCO</h1>
-    <canvas id="canvas" width="720px" height="480px"></canvas>
+    <div class="container">
+        <canvas id="canvas" width="720px" height="480px"></canvas>
+        <div class="info">
+            <button onclick="infoNote()">!</button>
+            <!-- <button onclick="toggleSound()">L</button> -->
+        </div>
+        <div  class="infoNote" id="infoNote">
+            <span>PRESS D = THROW BOTTLE</span>
+            <span>PRESS SPACE = JUMP</span>
+            <span>PRESS -> = RUN RIGHT</span>
+            <span> PRESS <-=RUN LEFT</span>
+        </div>
+        <div class="mobileKeys">
+            <div><button id="left" class="mobileButten">
+                    < </button>
+            </div>
+            <div><button id="right" class="mobileButten"> ></button></div>
+        </div>
+        <div class="mobileKeysTwo">
+            <div><button id="jump" class="mobileButten"> ^ </button></div>
+            <div><button id="throw" class="mobileButten"> <img src="img/6_salsa_bottle/salsa_bottle.png"
+                        alt=""></button></div>
+        </div>
+        <div id="startPolloLoco" class="startPolloLoco">
+            <button class="startButton" onclick="start()">START</button>
+            <img class="start" src="img/9_intro_outro_screens/start/startscreen_2.png" alt="">
+        </div>
+        <div id="gameOver" class="gameOver">
+            <button class="startButton" onclick="reStart()">RESTART</button>
+            <img class="over" src="img/9_intro_outro_screens/game_over/game over.png" alt="">
+        </div>
+        <div id="nextLevel" class="nextGamePolloLoco">
+            <button class="next">NEXT LEVEL <p> Not yet available</p></button>
+            <img src="img/9_intro_outro_screens/start/startscreen_1.png" alt="">
+            <button class="neustart" onclick="startAnew()">START ANEW</button>
+        </div>
+    </div>
+
     <div class="directions">
         <span>PRESS D = THROW BOTTLE</span>
         <span>PRESS SPACE = JUMP</span>
         <span>PRESS -> = RUN RIGHT</span>
         <span> PRESS <-=RUN LEFT</span>
     </div>
-    <div id="startPolloLoco" class="startPolloLoco">
-        <button class="startButton" onclick="start()">START</button>
-        <img class="start" src="img/9_intro_outro_screens/start/startscreen_2.png" alt="">
-    </div>
-    <div id="gameOver" class="gameOver">
-        <button class="startButton" onclick="reStart()">RESTART</button>
-        <img class="over" src="img/9_intro_outro_screens/game_over/game over.png" alt="">
-    </div>
-    <div id="nextLevel" class="nextGamePolloLoco">
-        <button class="next">NEXT LEVEL <p> Not yet available</p></button>
-        <img class="start" src="img/9_intro_outro_screens/start/startscreen_1.png" alt="">
-        <button class="neustart" onclick="startAnew()">START ANEW</button>
-    </div>
+
+
 
 </body>
 

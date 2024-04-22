@@ -16,6 +16,7 @@ body {
 canvas {
     background-color: black;
     display: block;
+
 }
 
 h1 {
@@ -26,20 +27,47 @@ h1 {
     font-size: 30px;
     display: flex;
     flex-direction: column;
+    margin-top: 40px;
 }
 
 .start {
-    width: 720px;
-    height: 480px;
+    width: 100%; /* Ändere die Breite auf 100% */
+    height: 100%; /* Setze die Höhe auf 100% */
+    max-width: 720px; /* Setze eine maximale Breite */
+    max-height: 480px; /* Setze eine maximale Höhe */
     position: absolute;
-    top: 140px;
-
+    top: 0;
+    left: 0; /* Füge die Position für die linke Seite hinzu */
+    right: 0; /* Füge die Position für die rechte Seite hinzu */
+    bottom: 0; /* Füge die Position für die untere Seite hinzu */
 }
 
 .startPolloLoco {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.over {
+    width: 720px;
+    height: 480px;
+    position: absolute;
+    top: 0px;
+    background-color: black;
+}
+
+.gameOver {
+    display: none;
+    width: 100%; /* Ändere die Breite auf 100% */
+    height: 100%; /* Setze die Höhe auf 100% */
+}
+
+.gameOver img {
+    object-fit: contain; /* Setze das Bild so ein, dass es in den Container passt */
+    width: 100%; /* Setze die Breite des Bildes auf 100% */
+    height: 100%; /* Setze die Höhe des Bildes auf 100% */
+    max-width: 720px; /* Setze eine maximale Breite */
+    max-height: 480px; /* Setze eine maximale Höhe */
 }
 
 .startButton {
@@ -50,57 +78,37 @@ h1 {
     transition: font-size 0.5s ease-in-out, background-color 0.5s ease-in-out;
     cursor: pointer;
     position: absolute;
-    top: 170px;
+    top: 15%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
     z-index: 1;
 }
-
-.over {
-    width: 720px;
-    height: 480px;
-    position: absolute;
-    top: 140px;
-    background-color: rgb(255, 242, 53);
-}
-
-.gameOver {
-    font-size: 50px;
-    font-family: 'Permanent Marker', cursive;
-    background-color: yellow;
-    border-radius: 10px;
-    transition: font-size 0.5s ease-in-out, background-color 0.5s ease-in-out;
-    cursor: pointer;
-    position: absolute;
-    z-index: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    display: none;
-}
-
-.startButton:hover {
-    font-size: 70px;
+.startButton:hover{
+    font-size: 60px;
     background-color: rgb(208, 255, 0);
 }
 
 .nextGamePolloLoco {
-    font-size: 50px;
-    font-family: 'Permanent Marker', cursive;
-    cursor: pointer;
+    width: 100%; 
+    height: 100%; 
     position: absolute;
-    z-index: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    top: 0;
     display: none;
 }
 
-.next{
+.nextGamePolloLoco img {
+    height: 100%;
+    width: 100%;
+}
+
+.next {
     font-size: 30px;
     font-family: 'Permanent Marker', cursive;
     border-radius: 10px;
     cursor: pointer;
     position: absolute;
-    top: 170px;
+    top: 15%;
+    left: 38%;
     z-index: 1;
     background-color: grey;
 }
@@ -108,29 +116,145 @@ h1 {
 .next p {
     font-size: 15px;
 }
-.neustart{
+
+.neustart {
     position: absolute;
-    top: 500px;
+    bottom: 15%;
+    left: 37%;
     font-size: 30px;
     border-radius: 10px;
     font-family: 'Permanent Marker', cursive;
     background-color: yellow;
     transition: font-size 0.5s ease-in-out, background-color 0.5s ease-in-out;
+    cursor: pointer;
 }
-.neustart:hover{
+
+
+.neustart:hover {
     font-size: 40px;
     background-color: rgb(208, 255, 0);
 }
 
+.mobileButten {
+    height: 50px;
+    width: 50px;
+    background-color: yellow;
+    border-radius: 30px;
+    font-size: 40px;
+    cursor: pointer;
+    position: absolute;
+    z-index: 1;
+    bottom: 10px;
+    gap: 20px;
+    display: flex;
+   
+    justify-content: center;
+    align-items: center;
+}
 
-@media only screen and(max-width: 720px) {
-    canvas {
-        width: 100%;
+.container {
+    position: relative;
+}
+
+button img {
+    height: 50px;
+    width: 50px;
+    text-align: center;
+}
+.mobileKeys{
+    position: absolute;
+    left: 10px;
+    display: flex;
+    gap: 60px;
+}
+
+.mobileKeysTwo {
+    position: absolute;
+    right: 60px;
+    gap: 20px;
+    display: flex;
+    gap: 65px;
+}
+
+
+.mobileButten:hover {
+    background-color: rgb(208, 255, 0);
+}
+
+text {
+    position: absolute;
+}
+.info button{
+    background-color: yellow;
+    border-radius: 30px;
+    height: 30px;
+    width: 30px;
+    font-size: 20px;
+    font-weight: bold;
+}
+.info{
+position: absolute;
+top: 10px;
+right: 10px;
+z-index: 2;
+}
+.info button:hover{
+    background-color: rgb(208, 255, 0);
+    cursor: pointer;
+}
+.infoNote{
+    height: 250px;
+    width: 500px;
+    background-color: lightgray;
+    border-radius: 30px;
+    position: absolute;
+    top: 20%;
+    left: 15%;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    display: none;
+}
+
+@media(max-width: 950px) {
+    h1{
+        display: none;
+    }
+    .directions {
+        display: none;
     }
 }
 
-@media only screen and(max-height: 480px) {
-    canvas {
+@media only screen and (max-width: 720px) {
+
+    canvas,
+    .start,
+    .over,
+    .gameOver {
+        width: 100%;    
+    }
+
+    .startButton,.neustart {
+        font-size: 25px;
+    }
+    .startButton:hover{
+        font-size: 30px;
+    }
+    .neustart:hover{
+        font-size: 30px;
+    } 
+}
+
+@media only screen and (max-height: 480px) {
+
+    canvas,
+    .start,
+    .over,
+    .gameOver {
         height: 100vh;
+        font-size: 25px;
     }
 }

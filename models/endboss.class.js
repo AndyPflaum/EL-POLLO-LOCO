@@ -53,8 +53,9 @@ class Endboss extends MovableObject {
 
     animate() {
         setInterval(() => {
-            if (world.character.energy <= 0 ) {
+            if (world.character.energy <= 0  ) {
                 this.finalBoss_sound.pause();
+                world.mexico_sound.pause();
             } else if (world.character.x >= 1160 || this.hadFirstContact) {
                 this.hadFirstContact = true;
                 this.finalBoss_sound.play();       

@@ -96,7 +96,8 @@ class Character extends MovableObject {
     playcharacter() {
         if (this.isDead() && !this.hasPlayedDeathSound) {
             this.playAnimation(this.IMAGES_DEAD);
-            // this.pains_sound.play();
+            this.pains_sound.play();
+            this.hasPlayedDeathSound = true;
         } else if (this.isHurt()) {
             this.playAnimation(this.IMAGES_HURT);
         }

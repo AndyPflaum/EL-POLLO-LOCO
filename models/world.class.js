@@ -42,7 +42,6 @@ class World {
             self.checkThrowObject();
             if (self.character.energy <= 0 || self.level.endboss.x >= -1440) {
                 self.gameOver();
-                self.level.endboss.finalBoss_sound.pause();
             }
             if (self.bossLife <= 0) {
                 setTimeout(() => {
@@ -106,18 +105,19 @@ class World {
 
         return this.bossLife; 
     }
+    characterReceivesHit(){
+        this.character.hit(); 
+        this.stadusBar.setPercentage(this.character.energy);
+    }
 
     checkCollisions() {
-        if (this.level.endboss.some(boss => boss.isColliding(this.character))) {
-            this.character.hit(); 
-            this.stadusBar.setPercentage(this.character.energy); 
+        if (this.isTheEndbossCollidingCharacter(this.character)) {
+            this.characterReceivesHit();          
         };
-
         let chickenHit = false; 
-
         this.level.enemies.forEach((enemy, index) => {
             if (this.checkCharachrterForCollidingChicken(enemy)) {
-                if (this.character.y + 270 <= enemy.y && this.character.x <= enemy.x) {
+                if (this.characterJumpsOnTheChicken(enemy)) {
                     if (!chickenHit) {
                         this.jumpOnTheChicken(enemy); 
                         setTimeout(() => {
@@ -154,9 +154,8 @@ class World {
 
             this.throwableObject.forEach((bottle, bottleIndex) => {
                 let chickenHit = false;
-
                 this.level.enemies.forEach((enemy, enemyIndex) => {
-                    if (!chickenHit && enemy instanceof Chicken && enemy.isColliding(bottle)) {
+                    if (this.isChickenCollidingBottle(bottle, chickenHit, enemy)) {
                         enemy.energy = 0;
                         setTimeout(() => {
                             this.level.enemies.splice(enemyIndex, 1);
@@ -172,10 +171,8 @@ class World {
 
         if (this.coinValue <= 100) {
             this.level.coin.forEach((coin) => {
-                if (this.character.isColliding(coin)) {
-                    this.playCoinSound();
-                    this.level.removeCoin(coin);
-                    this.coinValue += 20;
+                if (this.isCharacterCollidingCoin(coin)) {
+                    this.characterIsCollidingCoin(coin)
                     if (this.coinValue === 100) {
                         this.coinValue = 100;
                     }
@@ -186,12 +183,10 @@ class World {
         if (this.bottleValue < 100) {
             this.level.bottle.forEach((bottle, index,) => {
                 if (this.checkCharachrterForCollidingBottle(bottle)) {
-                    this.bottle_sound.play();
-                    this.bottleValue += 20;
+                    this.characterIsCollidingBottle();
                     if (this.bottleValue > 100) {
                         this.bottleValue = 100;
                     }
-
                     this.bottleBar.setPercentage(this.bottleValue); 
                     this.level.bottle.splice(index, 1); 
                     this.bossBar.setPercentage(this.bossLife);
@@ -200,6 +195,28 @@ class World {
 
 
         };
+    }
+
+    isTheEndbossCollidingCharacter(character){
+        return this.level.endboss.some(boss => boss.isColliding(character))
+    }
+
+    characterJumpsOnTheChicken(enemy){
+        return this.character.y + 270 <= enemy.y && this.character.x <= enemy.x;
+    }
+
+    isChickenCollidingBottle(bottle, chickenHit, enemy) {
+        return !chickenHit && enemy instanceof Chicken && enemy.isColliding(bottle);
+    }
+
+    isCharacterCollidingCoin(coin){
+       return this.character.isColliding(coin)
+    }
+
+    characterIsCollidingCoin(coin){
+        this.playCoinSound();
+        this.level.removeCoin(coin);
+        this.coinValue += 20;
     }
 
     jumpOnTheChicken(enemy){
@@ -214,6 +231,11 @@ class World {
     checkCharachrterForCollidingBottle(bottle) {
         return this.character.isColliding(bottle);
     }
+    characterIsCollidingBottle(){
+        this.bottle_sound.play();
+        this.bottleValue += 20;
+    }
+
     removeBottle(index) {
         this.throwableObject.splice(index, 1);
     }
