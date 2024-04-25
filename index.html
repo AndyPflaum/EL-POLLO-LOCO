@@ -2,13 +2,11 @@
 <html lang="en">
 <html translate="no">
 
-</html>
-
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EL POLLO LOCO</title>
+    <link rel="icon" href="./img/kopf.png">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
     <script src="models/drawable-object.class.js"></script>
@@ -28,6 +26,7 @@
     <script src="models/level.class.js"></script>
     <script src="models/throwable-object.class.js"></script>
     <script src="models/endboss.class.js"></script>
+    <script src="models/smallChicken.class.js"></script>
     <script src="levels/level1.js"></script>
     <script src="js/game.js"></script>
     <link rel="stylesheet" href="style.css">
@@ -35,18 +34,19 @@
 
 <body onload="init()">
     <h1>EL POLLO LOCO</h1>
-    <div class="container">
+    <div class="container" id="fullscreen">
         <canvas id="canvas" width="720px" height="480px"></canvas>
-        <div class="info">
-            <button onclick="infoNote()">!</button>
-            <!-- <button onclick="toggleSound()">L</button> -->
-        </div>
         <div  class="infoNote" id="infoNote">
             <span>PRESS D = THROW BOTTLE</span>
             <span>PRESS SPACE = JUMP</span>
             <span>PRESS -> = RUN RIGHT</span>
             <span> PRESS <-=RUN LEFT</span>
         </div>
+        <div class="info">
+            <img onclick="infoNote()" src="img/keyboard-2104009_1280.png" >
+            <!-- <button onclick="toggleSound()">L</button> -->
+        </div>
+        
         <div class="mobileKeys">
             <div><button id="left" class="mobileButten">
                     < </button>

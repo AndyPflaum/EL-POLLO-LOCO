@@ -24,7 +24,7 @@ class Endboss extends MovableObject {
         'img/4_enemie_boss_chicken/4_hurt/G21.png',
         'img/4_enemie_boss_chicken/4_hurt/G22.png',
         'img/4_enemie_boss_chicken/4_hurt/G23.png',
-    ]
+    ];
     IMAGES_ATTACK = [
         'img/4_enemie_boss_chicken/3_attack/G13.png',
         'img/4_enemie_boss_chicken/3_attack/G14.png',
@@ -34,7 +34,13 @@ class Endboss extends MovableObject {
         'img/4_enemie_boss_chicken/3_attack/G18.png',
         'img/4_enemie_boss_chicken/3_attack/G19.png',
         'img/4_enemie_boss_chicken/3_attack/G20.png',
-    ]
+    ];
+    offset = {
+        top: 20,
+        left: 80,
+        right: 80,
+        bottom: 0
+    }
 
     hadFirstContact = false;
 
@@ -47,19 +53,19 @@ class Endboss extends MovableObject {
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_ATTACK);
         this.x = 2100;
-        this.speed = 40;;
+        this.speed = 40;
         this.animate();
     }
 
     animate() {
         setInterval(() => {
-            if (world.character.energy <= 0  ) {
+            if (this.energIsAtZero()) {
                 this.finalBoss_sound.pause();
                 world.mexico_sound.pause();
             } else if (world.character.x >= 1160 || this.hadFirstContact) {
                 this.hadFirstContact = true;
-                this.finalBoss_sound.play();       
-                this.finalBoss_sound.volume = 0.7; 
+                this.finalBoss_sound.play();
+                this.finalBoss_sound.volume = 0.7;
                 if (world.bossLife > 0) {
                     this.moveLeft();
                 }
@@ -88,6 +94,10 @@ class Endboss extends MovableObject {
             }
         });
         return isHurt;
+    }
+
+    energIsAtZero(){
+       return world.character.energy <= 0;
     }
 
 }

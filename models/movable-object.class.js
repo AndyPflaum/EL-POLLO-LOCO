@@ -7,10 +7,10 @@ class MovableObject extends DrawableObject {
     lastHit = 0;
     applygravityInterval;
     offset = {
-        top: 120,
-        left: 300,
-        right: 400,
-        bottom: 30
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0
     }
    
     applygravity() {
@@ -31,10 +31,10 @@ class MovableObject extends DrawableObject {
     }
 
     isColliding(mo) {
-        return this.x + this.height > mo.x &&
-            this.y + this.width > mo.y &&
-            this.x < mo.x + mo.height &&
-            this.y < mo.y + mo.width
+        return this.x + this.height - this.offset.right > mo.x + mo.offset.left &&
+            this.y + this.width - this.offset.bottom > mo.y + mo.offset.top &&
+            this.x + this.offset.left < mo.x + mo.height - mo.offset.right &&
+            this.y + this.offset.top < mo.y + mo.width -mo.offset.bottom;
     }
 
     hit() {

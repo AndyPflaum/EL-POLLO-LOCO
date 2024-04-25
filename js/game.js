@@ -18,7 +18,7 @@ function start() {
     function updateSound() {
         if (world.character.x <= 1160) {
             if (!soundPaused) {
-                world.mexico_sound.play();
+                // world.mexico_sound.play();
                 soundPaused = true;
             }
         } else {
@@ -48,12 +48,35 @@ function closInfo() {
 function infoNote() {
     let infoNote = document.getElementById('infoNote');
     if (infoNote.style.display === 'flex') {
-        infoNote.style.display = 'none'; // Ausblenden
+        infoNote.style.display = 'none'; 
     } else {
-        infoNote.style.display = 'flex'; // Einblenden
+        infoNote.style.display = 'flex'; 
     }
 }
 
+// function fullscreen(){
+//     let fullscreen = document.getElementById('fullscreen');
+//     openFullscreen(fullscreen);
+// }
+
+// function openFullscreen(elem) {
+//     if (elem.requestFullscreen) {
+//       elem.requestFullscreen();
+//     } else if (elem.webkitRequestFullscreen) { /* Safari */
+//       elem.webkitRequestFullscreen();
+//     } else if (elem.msRequestFullscreen) { /* IE11 */
+//       elem.msRequestFullscreen();
+//     }
+//   }
+//   function closeFullscreen() {
+//     if (document.exitFullscreen) {
+//       document.exitFullscreen();
+//     } else if (document.webkitExitFullscreen) { /* Safari */
+//       document.webkitExitFullscreen();
+//     } else if (document.msExitFullscreen) { /* IE11 */
+//       document.msExitFullscreen();
+//     }
+//   }
 
 function test123() {
     document.getElementById("left").addEventListener("touchstart", () => {

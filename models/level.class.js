@@ -14,13 +14,14 @@ class Level {
      * @param {BackgroundObjects} backgroundObjects 
      * @param {Coins} coin
      */
-    constructor(enemies, clouds, backgroundObjects, coin, bottle, endboss) {
+    constructor(enemies, clouds, backgroundObjects, coin, bottle, endboss, smallChicken) {
         this.enemies = enemies;
         this.clouds = clouds;
         this.backgroundObjects = backgroundObjects;
         this.coin = coin;
         this.bottle = bottle;
         this.endboss = endboss;
+        this.smallChicken = smallChicken;
 
     }
     /**

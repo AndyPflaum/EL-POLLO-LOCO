@@ -2,10 +2,9 @@ class DrawableObject{
     img;
     imageCache = {};
     currentImage = 0;
-    x = 100;
+    x = -1000;
     y = 250;
-    width = 100;
-    height = 100;
+    
 
     loadImage(path) {
         this.img = new Image();
@@ -17,7 +16,7 @@ class DrawableObject{
     }
 
     drawFrame(ctx) {
-        // if (this instanceof Character || this instanceof Chicken || this instanceof Endboss || this instanceof Bottle) {
+        // if (this instanceof Character || this instanceof Chicken || this instanceof Endboss || this instanceof Bottle || this instanceof SmallChicken || this instanceof Coin) {
         //     ctx.beginPath();
         //     ctx.lineWidth = '5';
         //     ctx.strokeStyle = 'blue';

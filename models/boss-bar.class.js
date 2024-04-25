@@ -14,7 +14,7 @@ class BossBar extends MovableObject {
         super();
         this.loadImages(this.IMAGES);
         this.x = 500;
-        this.y = 10;
+        this.y = 30;
         this.width = 60;
         this.height = 200;
         this.setPercentage(100);
