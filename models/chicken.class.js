@@ -22,10 +22,13 @@ class Chicken extends MovableObject {
         this.x = 300 + Math.random() * 1200;
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_DEAD);
-        this.speed = 1 + Math.random()* 5;
+        this.speed = 1 + Math.random() * 5;
         this.animate();
     }
 
+    /**
+    * Animates the character by repeatedly executing movement and animation logic.
+    */
     animate() {
         setInterval(() => {
             if (this.isDead()) {
@@ -35,12 +38,10 @@ class Chicken extends MovableObject {
                 this.playAnimation(this.IMAGES_WALKING);
             }
         }, 100);
-    
         setInterval(() => {
             if (!this.isDead()) {
                 this.moveLeft();
-            }  
-         }, 100);
+            }
+        }, 100);
     }
-
 }

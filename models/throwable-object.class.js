@@ -15,6 +15,7 @@ class ThrowableObject extends MovableObject {
         'img/6_salsa_bottle/bottle_rotation/bottle_splash/5_bottle_splash.png',
         'img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png',
     ]
+    throwInterval;
 
     constructor(x, y) {
         super().loadImage('img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png');
@@ -29,8 +30,9 @@ class ThrowableObject extends MovableObject {
 
     }
 
-    throwInterval;
-
+    /**
+     * Throws the bottle.
+     */
     throw() {
         this.speedY = 20;
         this.applygravity();
@@ -43,19 +45,27 @@ class ThrowableObject extends MovableObject {
             }
         }, 25);
     }
-    
+
+    /** 
+    * Stops the bottle animation.
+    */
     stopBottle() {
         clearInterval(this.applygravityInterval);
         clearInterval(this.trowInterval);
     }
 
+    /** 
+    * Checks if the bottle falls on the floor.
+    */
     bottleFallsOnTheFloor() {
         if (this.y >= 350) {
             this.isBroken = true;
         }
-
     }
 
+    /**
+    * Animates the bottle. 
+    */
     animate() {
         setInterval(() => {
             if (this.isBroken && this.isAboveGround()) {

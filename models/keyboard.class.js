@@ -5,5 +5,4 @@ class Kayboard {
     DOWN = false;
     SPACE = false;
     D = false;
- 
 }

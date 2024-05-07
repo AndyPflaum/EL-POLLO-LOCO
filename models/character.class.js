@@ -72,7 +72,9 @@ class Character extends MovableObject {
     walking_sound = new Audio('audio/walking_sound.mp3');
     jump_sound = new Audio('audio/jump_sound.mp3');
     pains_sound = new Audio('audio/game-over-sound.mp3');
+    sleep_sound = new Audio('audio/sleep.mp3');
     hasPlayedDeathSound = false;
+    lastMovementTime = Date.now();
 
     constructor() {
         super().loadImage('img/2_character_pepe/2_walk/W-21.png');
@@ -81,82 +83,237 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_DEAD);
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_STAND);
+        this.loadImages(this.IMAGES_LONGSTAND);
         this.applygravity();
         this.animate();
-
     }
 
+    /**
+    * Initiates the animation loop for the character.
+    * 
+    * @remarks It controls character movement, camera position, and character animation.
+    */
     animate() {
         setInterval(() => {
-            this.soundcharacter()
+            this.soundcharacter();
             this.moveCharacter();
             this.world.camera_x = -this.x + 100;
         }, 1000 / 60);
 
-        setInterval(() => this.playcharacter(), 150);
+        setInterval(() => this.playCharacter(), 150);
     }
+
+    /**
+     * Pauses the walking sound of the character.
+     */
     soundcharacter() {
         this.walking_sound.pause();
     }
 
-    playcharacter() {
-        if (this.isDead() && !this.hasPlayedDeathSound) {
-            this.playAnimation(this.IMAGES_DEAD);
-            this.pains_sound.play();
-            this.hasPlayedDeathSound = true;
-        } else if (this.isHurt()) {
-            this.playAnimation(this.IMAGES_HURT);
+    /**
+    * Plays the appropriate character animation based on its current state.
+    * 
+    * @remarks It checks if the character is dead, hurt, jumping, moving, or standing,
+    * and plays the corresponding animation.
+    */
+    playCharacter() {
+        if (this.isDead()) {
+            this.playDeadAnimation();
+            return;
         }
-        else if (this.isAboveGround()) {
-            this.playAnimation(this.IMAGES_JUMPUNG);
-        } else {
-            if (this.world.keybord.RIGHT || this.world.keybord.LEFT) {
-                this.playAnimation(this.IMAGES_WALKING);
-            } else {
-                this.playAnimation(this.IMAGES_STAND);
+        if (this.isHurt()) {
+            this.playHurtAnimation();
+            return;
+        }
+        if (this.isAboveGround()) {
+            this.playJumpAnimation();
+            return;
+        }
+        if (this.isMovingRightOrLeft()) {
+            return;
+        }
+        this.characterStand();
+    }
+
+    /**
+    * Plays the dead animation for the character.
+    * If the death sound has not been played yet and the game sound is enabled,
+    * plays the death sound and disables game sound.
+    */
+    playDeadAnimation() {
+        if (!this.hasPlayedDeathSound) {
+            this.playAnimation(this.IMAGES_DEAD);
+            if (this.world.sound && !this.hasPlayedPainsSound) {
+                this.pains_sound.play();
+                this.hasPlayedPainsSound = true;
+                this.world.sound = false;
             }
         }
     }
 
+    /**
+    * Plays the hurt animation for the character.
+    */
+    playHurtAnimation() {
+        this.playAnimation(this.IMAGES_HURT);
+    }
+
+    /**
+     * Plays the jumping animation for the character.
+     */
+    playJumpAnimation() {
+        this.playAnimation(this.IMAGES_JUMPUNG);
+    }
+
+    /**
+    * Checks if the character is currently moving to the right or left.
+    * Updates the last movement time, plays walking animation, and pauses sleep sound if moving.
+    * 
+    * @returns {boolean} True if the character is moving right or left, otherwise false.
+    */
+    isMovingRightOrLeft() {
+        if (this.world.keybord.RIGHT || this.world.keybord.LEFT) {
+            this.lastMovementTime = Date.now();
+            this.playAnimation(this.IMAGES_WALKING);
+            this.sleep_sound.pause();
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Sets the character's animation to standing.
+     * If the character has not moved for 5 seconds, switches to a long-standing animation and plays a sleep sound.
+     */
+    characterStand() {
+        this.playAnimation(this.IMAGES_STAND);
+        if (Date.now() - this.lastMovementTime >= 5000) {
+            this.playAnimation(this.IMAGES_LONGSTAND);
+            this.sleepSound();
+        }
+    }
+
+    /**
+    * Checks if the character is currently moving to the right or left.
+    * Updates the last movement time, plays walking animation, and pauses sleep sound if moving.
+    * 
+    * @returns {boolean} True if the character is moving right or left, otherwise false.
+    */
+    pressedRightOrLeft() {
+        if (this.world.keybord.RIGHT || this.world.keybord.LEFT) {
+            this.lastMovementTime = Date.now();
+            this.playAnimation(this.IMAGES_WALKING);
+            this.sleep_sound.pause();
+            return true;
+        }
+        return false;
+    }
+
+    /**
+    * Sets the character's animation to standing.
+    * If the character has not moved for 5 seconds, switches to a long-standing animation and plays a sleep sound.
+    */
+    characterStand() {
+        this.playAnimation(this.IMAGES_STAND);
+        if (Date.now() - this.lastMovementTime >= 5000) {
+            this.playAnimation(this.IMAGES_LONGSTAND);
+            this.sleepSound();
+        }
+    }
+
+    /**
+     * Controls the sleep sound of the character based on game sound status.
+     * Plays or pauses the sleep sound accordingly.
+     */
+    sleepSound() {
+        if (this.world.sound === false) {
+            this.sleep_sound.pause();
+        } else {
+            this.sleep_sound.play();
+        }
+    }
+
+    /**
+     * Moves the character based on keyboard input.
+     * Checks if the character can move right, left, or jump, and performs the corresponding actions.
+     */
     moveCharacter() {
         if (this.canMoveRight())
             this.moveRight();
         if (this.canMoveLeft())
             this.moveLeft();
-        if (this.canJump()) 
-            this.isJump();        
+        if (this.canJump())
+            this.isJump();
     }
 
+    /**
+    * Initiates a jump action for the character if sound is enabled.
+    * Plays the jump sound and performs the jump action.
+    */
     isJump() {
-        this.jump_sound.play();
+        if (this.world.sound === true) {
+            this.jump_sound.play();
+        }
         this.jump();
     }
 
+    /**
+     * Moves the character to the right if sound is enabled.
+     * Plays the walking sound and calls the parent moveRight method.
+     */
     moveRight() {
+        if (this.world.sound === true) {
+            this.walking_sound.play();
+        }
         super.moveRight();
-        this.walking_sound.play();
         this.otherDiretion = false;
     }
 
+    /**
+     * Moves the character to the left if sound is enabled.
+     * Plays the walking sound and calls the parent moveLeft method.
+     */
     moveLeft() {
+        if (this.world.sound === true) {
+            this.walking_sound.play();
+        }
         super.moveLeft();
-        this.walking_sound.play();
         this.otherDiretion = true;
     }
 
+    /**
+    * Checks if the character can perform a jump action.
+    * 
+    * @returns {boolean} True if the character can jump, otherwise false.
+    */
     canJump() {
         return this.world.keybord.SPACE && !this.isAboveGround();
     }
 
+    /**
+     * Checks if the character can move to the right.
+     * 
+     * @returns {boolean} True if the character can move right, otherwise false.
+     */
     canMoveRight() {
         return this.world.keybord.RIGHT && this.x < world.level.level_end_x;
     }
 
+    /**
+     * Checks if the character can move to the left.
+     * 
+     * @returns {boolean} True if the character can move left, otherwise false.
+     */
     canMoveLeft() {
         return this.world.keybord.LEFT && this.x > -1330;
     }
 
+    /**
+     * Initiates a jump action for the character by setting its vertical speed.
+     */
     jump() {
         this.speedY = 30;
     }
+
+
 }

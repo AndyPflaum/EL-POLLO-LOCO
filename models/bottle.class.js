@@ -13,8 +13,6 @@ class Bottle extends MovableObject {
         super().loadImage(imagePatch);
         this.x = Math.random() * (719 * 2 + 1400) - 1350;
         this.y = 356;
-       
-
     }
 
 }

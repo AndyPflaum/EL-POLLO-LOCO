@@ -20,13 +20,23 @@ class BossBar extends MovableObject {
         this.setPercentage(100);
     }
 
+    /**
+    * Sets the percentage value and updates the image based on the provided percentage.
+    * 
+    * @param {number} percentage - The percentage value to set.
+    */
     setPercentage(percentage) {
         this.percentage = percentage;
         let path = this.IMAGES[this.resolveImageIndex()];
         this.img = this.imageCache[path];
         this.otherDiretion = true;
     }
-    
+
+    /**
+     * Resolves the image index based on the current percentage value.
+     * 
+     * @returns {number} The index of the image to use based on the percentage.
+     */
     resolveImageIndex() {
         if (this.percentage >= 100) {
             return 5;
@@ -41,5 +51,5 @@ class BossBar extends MovableObject {
         } else {
             return 0;
         }
-    }
+    }   
 }
