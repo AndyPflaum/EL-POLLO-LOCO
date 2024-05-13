@@ -3,7 +3,7 @@ let world;
 let keybord = new Kayboard();
 let character;
 let endboss;
-let isVolumeOn = false;
+let isVolumeOn;
 
 /**
  * Initializes the canvas element.
@@ -22,9 +22,8 @@ function start() {
     closInfo();
     initLevel();
     mobilRun();
-    world = new World(canvas, keybord);
-    world.mexico_sound.play();
-    world.finalBoss_sound.pause();
+    lautSound();
+    world = new World(canvas, keybord);  
 }
 
 /**
@@ -34,11 +33,14 @@ function start() {
 function reStart() {
     let restartPolloLoco = document.getElementById('gameOver');
     restartPolloLoco.style.display = 'none';
-    world = null;
-    level1 = null;
-    character = null;
+    WorldTwo= null;
     clearAllIntervals();
     start();
+}
+function lautSound(){
+    let volume = document.getElementById('volume');
+    volume.src = 'img/lautsprecher.png';
+    isVolumeOn = false;
 }
 
 function clearAllIntervals() {
@@ -50,7 +52,10 @@ function clearAllIntervals() {
  * Reloads the page to start the game anew.
  */
 function startAnew() {
-    location.reload();
+    let nextLevel = document.getElementById('nextLevel');
+        nextLevel.style.display = 'none';
+        reStart();
+        
 }
 
 /**
@@ -173,11 +178,9 @@ function volume() {
     if (isVolumeOn) {
         volume.src = 'img/lautsprecher.png';
         world.sound = true;
-        world.character.sound = true;
     } else {
         volume.src = 'img/stumm.png';
         world.sound = false;
-        world.character.sound = false;
     }
     isVolumeOn = !isVolumeOn;
 }

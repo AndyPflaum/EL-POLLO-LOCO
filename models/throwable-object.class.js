@@ -75,4 +75,12 @@ class ThrowableObject extends MovableObject {
             }
         }, 50);
     }
+    
+    test123(){
+        if (world.character.moveLeft()) {
+            world.otherDiretion = true;
+        }else{
+            world.otherDiretion = false;
+        }
+    }
 }

@@ -53,7 +53,7 @@ class Character extends MovableObject {
         'img/2_character_pepe/1_idle/idle/I-7.png',
         'img/2_character_pepe/1_idle/idle/I-8.png',
         'img/2_character_pepe/1_idle/idle/I-9.png',
-        'img/2_character_pepe/1_idle/idle/I-10.png',
+        'img/2_character_pepe/1_idle/idle/I-10.png'
 
     ]
     IMAGES_LONGSTAND = [
@@ -66,7 +66,7 @@ class Character extends MovableObject {
         'img/2_character_pepe/1_idle/long_idle/I-17.png',
         'img/2_character_pepe/1_idle/long_idle/I-18.png',
         'img/2_character_pepe/1_idle/long_idle/I-19.png',
-        'img/2_character_pepe/1_idle/long_idle/I-20.png',
+        'img/2_character_pepe/1_idle/long_idle/I-20.png'
     ]
     wold;
     walking_sound = new Audio('audio/walking_sound.mp3');
@@ -97,6 +97,7 @@ class Character extends MovableObject {
         setInterval(() => {
             this.soundcharacter();
             this.moveCharacter();
+            this.notThrowToTheLeft();
             this.world.camera_x = -this.x + 100;
         }, 1000 / 60);
 
@@ -315,5 +316,12 @@ class Character extends MovableObject {
         this.speedY = 30;
     }
 
-
+    /**
+    * Prevents throwing to the left direction.
+    */
+    notThrowToTheLeft() {
+        if (this.otherDiretion === true) {
+            keybord.D = false;
+        }
+    }
 }
