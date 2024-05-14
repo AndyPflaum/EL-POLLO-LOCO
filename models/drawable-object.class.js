@@ -25,21 +25,6 @@ class DrawableObject {
     }
 
     /**
-    * Draws a frame around the object on the canvas context if it belongs to specific classes.
-    * 
-    * @param {CanvasRenderingContext2D} ctx - The canvas rendering context to draw on.
-    */
-    drawFrame(ctx) {
-        // if (this instanceof Character || this instanceof Chicken || this instanceof Endboss || this instanceof Bottle || this instanceof SmallChicken || this instanceof Coin) {
-        //     ctx.beginPath();
-        //     ctx.lineWidth = '5';
-        //     ctx.strokeStyle = 'blue';
-        //     ctx.rect(this.x, this.y, this.height, this.width);
-        //     ctx.stroke();
-        // }
-    }
-
-    /**
      * Loads images from an array of paths and stores them in the image cache.
      * 
      * @param {string[]} arr - An array of image paths to load.

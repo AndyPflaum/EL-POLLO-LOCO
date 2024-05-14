@@ -9,7 +9,7 @@ class World extends WorldTwo{
     throwableObject = [];
     coin_sound = new Audio('audio/coin_sound.mp3');
     coinBar = new CoinBar();
-    bottle = new Bottle();
+    bottle = [];
     bottleBar = new BottleBar();
     coinValue = 0;
     bottleValue = 0;
@@ -370,7 +370,6 @@ class World extends WorldTwo{
             this.flipImage(mo);
         }
         mo.draw(this.ctx);
-        mo.drawFrame(this.ctx);
         if (mo.otherDiretion) {
             this.flipImageBack(mo);
         }

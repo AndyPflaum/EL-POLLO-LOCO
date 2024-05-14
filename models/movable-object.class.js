@@ -84,10 +84,10 @@ class MovableObject extends DrawableObject {
     }
 
     /**
-                    * Plays the next frame of animation from the provided array of images.
-                    * 
-                    * @param {string[]} images - An array containing paths to the images for the animation.
-                    */
+    * Plays the next frame of animation from the provided array of images.
+    * 
+    * @param {string[]} images - An array containing paths to the images for the animation.
+    */
     playAnimation(images) {
         let i = this.currentImage % images.length;
         let path = images[i];

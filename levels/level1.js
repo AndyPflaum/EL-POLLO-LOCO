@@ -7,7 +7,7 @@ function initLevel() {
             new Chicken(),
             new Chicken(),
             new Chicken(),
-            new Chicken(),
+            new Chicken()
         ],
         [
             new Cloud(),
@@ -17,7 +17,7 @@ function initLevel() {
             new Cloud(),
             new Cloud(),
             new Cloud(),
-            new Cloud(),
+            new Cloud()
         ],
         [
             new BackgroundObject('img/5_background/layers/air.png', -719 * 2),
@@ -46,7 +46,7 @@ function initLevel() {
             new Coin(),
             new Coin(),
             new Coin(),
-            new Coin(),
+            new Coin()
         ],
         [
             new Bottle('img/6_salsa_bottle/1_salsa_bottle_on_ground.png'),
@@ -59,7 +59,7 @@ function initLevel() {
             new Bottle('img/6_salsa_bottle/2_salsa_bottle_on_ground.png'),
             new Bottle('img/6_salsa_bottle/1_salsa_bottle_on_ground.png'),
             new Bottle('img/6_salsa_bottle/1_salsa_bottle_on_ground.png'),
-            new Bottle('img/6_salsa_bottle/2_salsa_bottle_on_ground.png'),
+            new Bottle('img/6_salsa_bottle/2_salsa_bottle_on_ground.png')
         ],
         [
             new Endboss()
@@ -68,7 +68,7 @@ function initLevel() {
             new SmallChicken(),
             new SmallChicken(),
             new SmallChicken(),
-            new SmallChicken(),
+            new SmallChicken()
         ]
     );
 }

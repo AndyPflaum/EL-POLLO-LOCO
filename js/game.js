@@ -10,6 +10,7 @@ let isVolumeOn;
  */
 function init() {
     canvas = document.getElementById('canvas');
+    
 }
 
 /**

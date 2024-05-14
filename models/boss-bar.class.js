@@ -5,7 +5,7 @@ class BossBar extends MovableObject {
         'img/7_statusbars/2_statusbar_endboss/blue/blue40.png',
         'img/7_statusbars/2_statusbar_endboss/blue/blue60.png',
         'img/7_statusbars/2_statusbar_endboss/blue/blue80.png',
-        'img/7_statusbars/2_statusbar_endboss/blue/blue100.png',
+        'img/7_statusbars/2_statusbar_endboss/blue/blue100.png'
     ];
 
     percentage = 100;

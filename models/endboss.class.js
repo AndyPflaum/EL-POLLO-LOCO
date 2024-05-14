@@ -10,7 +10,7 @@ class Endboss extends MovableObject {
         'img/4_enemie_boss_chicken/2_alert/G9.png',
         'img/4_enemie_boss_chicken/2_alert/G10.png',
         'img/4_enemie_boss_chicken/2_alert/G11.png',
-        'img/4_enemie_boss_chicken/2_alert/G12.png',
+        'img/4_enemie_boss_chicken/2_alert/G12.png'
     ];
 
     IMAGES_DEAD = [
@@ -22,7 +22,7 @@ class Endboss extends MovableObject {
     IMAGES_HURT = [
         'img/4_enemie_boss_chicken/4_hurt/G21.png',
         'img/4_enemie_boss_chicken/4_hurt/G22.png',
-        'img/4_enemie_boss_chicken/4_hurt/G23.png',
+        'img/4_enemie_boss_chicken/4_hurt/G23.png'
     ];
 
     IMAGES_ATTACK = [
@@ -33,7 +33,7 @@ class Endboss extends MovableObject {
         'img/4_enemie_boss_chicken/3_attack/G17.png',
         'img/4_enemie_boss_chicken/3_attack/G18.png',
         'img/4_enemie_boss_chicken/3_attack/G19.png',
-        'img/4_enemie_boss_chicken/3_attack/G20.png',
+        'img/4_enemie_boss_chicken/3_attack/G20.png'
     ];
 
     offset = {
